@@ -564,59 +564,93 @@ func CreateTSMKey(mtf *MTF) string {
 // Get measurement, tags and field by matching the whisper filename with a
 // pattern in the config file
 func (migrationData *MigrationData) GetMTF(wspFilename string) *MTF {
-
 	wspFilename = strings.TrimSuffix(wspFilename, ".wsp")
 	wspFilename = strings.Replace(wspFilename, "/", ".", -1)
 	wspFilename = strings.Replace(wspFilename, ",", "_", -1)
 	wspFilename = strings.Replace(wspFilename, " ", "_", -1)
-
-	var patternStr []string
-	var matches [][]int
+	
+	//var matches [][]int
 	var tagConfig TagConfig
 	filenameMatched := false
+	
+	// Regex for replacing #TEXT arguments
+	regReplace, err := regexp.Compile(".#TEXT([0-9])")
+	if err != nil {
+        	fmt.Printf ("Compile failed");
+    	}
+	
+	///// CHANGED
 	for _, tagConfig = range migrationData.tagConfigs {
-		patternStr = strings.Split(tagConfig.Pattern, "#")
-		re := regexp.MustCompile(patternStr[0])
-		//FindAllIndex returns array of start and end index of the match
-		matches = re.FindAllIndex([]byte(wspFilename), -1)
-		if matches != nil {
+		
+		// Clear out the hash tags for the raw data
+		
+		var patternNoHash = regReplace.ReplaceAllString(tagConfig.Pattern, "")
+		fmt.Println(patternNoHash)
+		
+		var patternArr = strings.Split(patternNoHash, ".")
+		var matchCount = 0
+		for _, pat := range patternArr {
+			for _, filePat := range strings.Split(wspFilename, ".") {
+				if pat == filePat {
+					matchCount++
+				}	
+			}
+		}
+		
+		if matchCount == len(patternArr) {
+			fmt.Printf("\nMatched %v to pattern %v\n", wspFilename, tagConfig.Pattern)
 			filenameMatched = true
 			break
 		}
 	}
+
 	if filenameMatched == false {
 		return nil
 	}
-	//extract the string starting at end of the matched pattern
-	//e.g. carbon.relays.eud3-pr-mutgra1-a.whitelistRejects,
-	// the remaining would be eud3-pr-mutgra1-a.whitelistRejects
-	remaining := wspFilename[matches[0][1]:]
 
-	//Split the remaining string on .
-	//e.g. Now the remArr holds eud3-pr-mutgra1-a, whitelistRejects
-	remArr := strings.Split(remaining, ".")
-
-	//patternStr contains pattern split on #
-	//e.g. patternStr[0]carbon.relays. , patternStr[1]TEXT1. , patternStr[2]TEXT2.
 	var mtf MTF
+	
+	// Set tags to those in config
+	mtf.Tags = tagConfig.Tags
 
-	//start at i=1, that's #TEXT1 and iterate on all possible # strings in given
-	// pattern
-	mtf.Tags = make([]TagKeyValue, len(tagConfig.Tags))
-	for i := 1; i < len(patternStr)-1; i++ {
-		patternTagValue := strings.Trim(patternStr[i], ".")
-		//For each # string, find a match in tag values
-		for j, tagkeyvalue := range tagConfig.Tags {
-			if strings.Trim(tagkeyvalue.Tagvalue, "#") == patternTagValue {
-				mtf.Tags[j].Tagkey = tagkeyvalue.Tagkey
-				//Tag #value is replaced with the actual value
-				mtf.Tags[j].Tagvalue = remArr[i-1]
+	var patternArr = strings.Split(tagConfig.Pattern, ".")
+	var pathArr = strings.Split(wspFilename, ".")
+	var startIndex = 0
+	
+	// find the starting index using the first value of the pattern
+	for i, val := range pathArr {
+        	if (val == patternArr[0]) {
+            		startIndex = i
+        	}
+    	}
+	
+	// Regex for matching #TEXT arguments
+	regMatch, err := regexp.Compile("#TEXT([0-9])")
+	if err != nil {
+        	fmt.Printf ("Compile failed");
+    	}
+	
+	// replace any dynamic values 
+	for i := startIndex; i < len(pathArr); i++ {
+		checkVal := patternArr[i-startIndex]
+		
+		// only worry about replacing values
+		if regMatch.MatchString(checkVal) {
+			for j,tag := range mtf.Tags {
+				if tag.Tagvalue == checkVal {
+					fmt.Printf("Replcaing tag %v with %v\n", tag.Tagvalue, pathArr[i])
+					mtf.Tags[j].Tagvalue = pathArr[i]
+					break
+				}
+			}
+			if mtf.Measurement == checkVal {
+				mtf.Measurement = pathArr[i]
+			}
+			if mtf.Field == checkVal {
+				mtf.Field = pathArr[i]
 			}
 		}
 	}
-	// Assign the last string as measurement
-	mtf.Measurement = remArr[len(remArr)-1]
-	mtf.Field = tagConfig.Field
 	return &mtf
 }
 
