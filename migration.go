@@ -579,11 +579,8 @@ func (migrationData *MigrationData) GetMTF(wspFilename string) *MTF {
         	fmt.Printf ("Compile failed");
     	}
 	
-	///// CHANGED
+	// Finds a match by comparing the hard comparison values in the configuration
 	for _, tagConfig = range migrationData.tagConfigs {
-		
-		// Clear out the hash tags for the raw data
-		
 		var patternNoHash = regReplace.ReplaceAllString(tagConfig.Pattern, "")
 		fmt.Println(patternNoHash)
 		
@@ -598,6 +595,9 @@ func (migrationData *MigrationData) GetMTF(wspFilename string) *MTF {
 		}
 		
 		if matchCount == len(patternArr) {
+
+			TODO: CHECK HERE FOR THE NUMBER OF ARGUMENTS IN THE PATTERN COMPARED TO THE PATH (FROM THE FIRST PART OF THE PATTERN)
+
 			fmt.Printf("\nMatched %v to pattern %v\n", wspFilename, tagConfig.Pattern)
 			filenameMatched = true
 			break
@@ -619,10 +619,10 @@ func (migrationData *MigrationData) GetMTF(wspFilename string) *MTF {
 	
 	// find the starting index using the first value of the pattern
 	for i, val := range pathArr {
-        	if (val == patternArr[0]) {
-            		startIndex = i
-        	}
+    	if (val == patternArr[0]) {
+        		startIndex = i
     	}
+	}
 	
 	// Regex for matching #TEXT arguments
 	regMatch, err := regexp.Compile("#TEXT([0-9])")

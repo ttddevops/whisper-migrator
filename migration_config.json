@@ -1,39 +1,392 @@
 [
   {
-    "pattern": "carbon.relays.#TEXT1.#TEXT2",
-    "measurement": "#TEXT2",
-    "tags": [
-      {
-        "tagkey": "host",
-        "tagvalue": "#TEXT1"
-      }
-    ],
-    "field": "value"
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.bidder_connections.activebysupplyvendor.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT4"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "bidder_connections"
+    }],
+    "field": "activebysupplyvendor"
   },
   {
-    "pattern": "TLM.Sentinel.#TEXT1.#TEXT2.#TEXT3",
-    "measurement": "#TEXT3",
-    "tags": [
-      {
-        "tagkey": "host",
-        "tagvalue": "#TEXT1"
-      },
-      {
-        "tagkey": "computing",
-        "tagvalue": "#TEXT2"
-      }
-    ],
-    "field": "something"
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.bidder_connections.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "bidder_connections"
+    }],
+    "field": "#TEXT4"
   },
   {
-    "pattern": "carbon.agents.#TEXT1.#TEXT2",
-    "measurement": "#TEXT2",
-    "tags": [
-      {
-        "tagkey": "host",
-        "tagvalue": "#TEXT1"
-      }
-    ],
-    "field": "value"
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.bidder_connections.activebytier.#TEXT4",
+    "measurement": "#TEXT4",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "tier",
+      "tagvalue": "#TEXT4"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "bidder_connections"
+    }],
+    "field": "activebytier"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.bidder_feedback.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "bidder_feedback"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.bidder_requests.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "bidder_requests"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.biddercache.#TEXT4.#TEXT5.latencyhistogrammsec.#TEXT6",
+    "measurement": "#TEXT6",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "biddercache"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "latencyhistogrammsec"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.biddercache.#TEXT4.factual.#TEXT5.#TEXT6.#TEXT7",
+    "measurement": "#TEXT7",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "biddercache"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "factual"
+    }],
+    "field": "#TEXT6"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.biddercache.#TEXT4.factual.#TEXT5.#TEXT6",
+    "measurement": "#TEXT6",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "biddercache"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "factual"
+    }],
+    "field": "#TEXT5"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.biddercache.#TEXT4.#TEXT5.#TEXT6",
+    "measurement": "#TEXT6",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT5"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "biddercache"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.usercache.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "usercache"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.dataserver_requests.#TEXT4.#TEXT5.#TEXT6.#TEXT7",
+    "measurement": "#TEXT7",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT6"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "dataserver_requests"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "#TEXT5"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.dataserver_requests.#TEXT4.#TEXT5.#TEXT6",
+    "measurement": "#TEXT6",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT6"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "dataserver_requests"
+    }, {
+      "tagkey": "sub-service",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "#TEXT5"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.#TEXT2.streaming.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "streaming"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.bidder.#TEXT2.#TEXT3.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "bidder"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "service",
+      "tagvalue": "#TEXT3"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.bidder.#TEXT2.#TEXT3.#TEXT4",
+    "measurement": "#TEXT4",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "bidder"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT2"
+    }],
+    "field": "#TEXT3"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.feedback_requestcountpersecond.#TEXT4",
+    "measurement": "feedback_requestcountpersecond",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "feedback_requestcountpersecond"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.beacon.edaa.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "process",
+      "tagvalue": "beacon"
+    }, {
+      "tagkey": "vendor",
+      "tagvalue": "#TEXT4"
+    }],
+    "field": "#TEXT5"
+  },
+  {
+    "pattern": "whisper.#TEXT1.#TEXT2.#TEXT3.beacon.#TEXT4.#TEXT5",
+    "measurement": "#TEXT5",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "#TEXT2"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT3"
+    }, {
+      "tagkey": "process",
+      "tagvalue": "beacon"
+    }],
+    "field": "#TEXT4"
+  },
+  {
+    "pattern": "whisper.#TEXT1.tracking.#TEXT2.#TEXT3.#TEXT4",
+    "measurement": "#TEXT4",
+    "tags": [{
+      "tagkey": "datacenter",
+      "tagvalue": "#TEXT1"
+    }, {
+      "tagkey": "application",
+      "tagvalue": "tracking"
+    }, {
+      "tagkey": "host",
+      "tagvalue": "#TEXT2"
+    }],
+    "field": "#TEXT3"
   }
 ]
